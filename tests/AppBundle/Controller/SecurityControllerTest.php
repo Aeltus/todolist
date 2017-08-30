@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Created by PhpStorm.
+ * User: david
+ * Date: 30/08/17
+ * Time: 23:31
+ */
 namespace Tests\AppBundle\Controller;
 
 use AppBundle\Entity\User;
@@ -8,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-class DefaultControllerTest extends WebTestCase
+class SecurityControllerTest extends WebTestCase
 {
 
     protected $em;
@@ -47,33 +52,18 @@ class DefaultControllerTest extends WebTestCase
 
     }
 
-    public function testUnidentifiedIndexShouldRedirectToLogin()
+    public function testLoginShouldRedirectToIndex()
     {
-        $this->client->request('GET', '/');
+        $crawler = $this->client->request('GET', '/login');
+
+        $form = $crawler->selectButton('Se connecter')->form();
+        $form['_username'] = 'JohnDoe';
+        $form['_password'] = 'A45y22s@';
+
+        $this->client->submit($form);
+
         $this->assertEquals($this->client->getResponse()->getStatusCode(), 302);
 
-    }
-
-    public function testIdentifiedIndexShouldBeOk(){
-
-        $this->login(['ROLE_USER']);
-        $this->client->request('GET', '/');
-        $this->assertEquals($this->client->getResponse()->getStatusCode(), 200);
-
-    }
-
-    private function login($roles){
-        $session = $this->container->get('session');
-
-        // the firewall context defaults to the firewall name
-        $firewallContext = 'main';
-
-        $token = new UsernamePasswordToken('JohnDoe', null, $firewallContext, $roles);
-        $session->set('_security_'.$firewallContext, serialize($token));
-        $session->save();
-
-        $cookie = new Cookie($session->getName(), $session->getId());
-        $this->client->getCookieJar()->set($cookie);
     }
 
     protected function tearDown()

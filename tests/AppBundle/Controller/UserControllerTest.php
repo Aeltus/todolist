@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Created by PhpStorm.
+ * User: david
+ * Date: 30/08/17
+ * Time: 23:13
+ */
 namespace Tests\AppBundle\Controller;
 
 use AppBundle\Entity\User;
@@ -8,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-class DefaultControllerTest extends WebTestCase
+class UserControllerTest extends WebTestCase
 {
 
     protected $em;
@@ -47,18 +52,53 @@ class DefaultControllerTest extends WebTestCase
 
     }
 
-    public function testUnidentifiedIndexShouldRedirectToLogin()
+    public function testListShouldReturnAListOfUsers()
     {
-        $this->client->request('GET', '/');
-        $this->assertEquals($this->client->getResponse()->getStatusCode(), 302);
+        $this->login(['ROLE_USER']);
+        $this->client->request('GET', '/users');
+        $this->assertEquals($this->client->getResponse()->getStatusCode(), 200);
+
+        $this->assertContains('JohnDoe', $this->client->getResponse()->getContent());
 
     }
 
-    public function testIdentifiedIndexShouldBeOk(){
+    public function testCreateShouldAddANewUser(){
 
         $this->login(['ROLE_USER']);
-        $this->client->request('GET', '/');
-        $this->assertEquals($this->client->getResponse()->getStatusCode(), 200);
+        $crawler = $this->client->request('GET', '/users/create');
+        $form = $crawler->selectButton('Ajouter')->form();
+        $form['user[username]'] = 'JaneDoe';
+        $form['user[password][first]'] = 'testpass';
+        $form['user[password][second]'] = 'testpass';
+        $form['user[email]'] = 'janedoe@monmail.com';
+
+        $this->client->submit($form);
+
+        $this->assertEquals($this->client->getResponse()->getStatusCode(), 302);
+
+        $user = $this->em->getRepository('AppBundle:User')->findOneBy(['id' => 2]);
+
+        $this->assertEquals('JaneDoe', $user->getUsername());
+
+    }
+
+    public function testEditShouldUpdateAnUser(){
+
+        $this->login(['ROLE_USER']);
+        $crawler = $this->client->request('GET', '/users/1/edit');
+        $form = $crawler->selectButton('Modifier')->form();
+        $form['user[username]'] = 'JaneDoes';
+        $form['user[password][first]'] = 'testpass';
+        $form['user[password][second]'] = 'testpass';
+        $form['user[email]'] = 'janedoes@monmail.com';
+
+        $this->client->submit($form);
+
+        $this->assertEquals($this->client->getResponse()->getStatusCode(), 302);
+
+        $user = $this->em->getRepository('AppBundle:User')->findOneBy(['id' => 1]);
+
+        $this->assertEquals('JaneDoes', $user->getUsername());
 
     }
 
