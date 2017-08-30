@@ -25,7 +25,9 @@ class TaskController extends Controller
     {
         $task = new Task();
         $form = $this->createForm(TaskType::class, $task);
-        $task->setUser($user = $this->get('security.token_storage')->getToken()->getUser());
+
+        $user = $this->getDoctrine()->getRepository('AppBundle:User')->findOneBy(array('username' => $this->get('security.token_storage')->getToken()->getUser()->getUsername()));
+        $task->setUser($user);
 
         $form->handleRequest($request);
 
