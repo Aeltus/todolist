@@ -25,6 +25,7 @@ class TaskController extends Controller
     {
         $task = new Task();
         $form = $this->createForm(TaskType::class, $task);
+        $task->setUser($user = $this->get('security.token_storage')->getToken()->getUser());
 
         $form->handleRequest($request);
 
