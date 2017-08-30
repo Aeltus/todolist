@@ -39,6 +39,12 @@ class User implements UserInterface
      */
     private $email;
 
+    /**
+     * @ORM\Column(name="roles", type="array", nullable=false)
+     * @Assert\Type("array")
+     */
+    private $roles = array('ROLE_USER');
+
     public function getId()
     {
         return $this->id;
@@ -81,7 +87,15 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return $this->roles;
+    }
+
+    /**
+     * @param mixed $roles
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
     }
 
     public function eraseCredentials()

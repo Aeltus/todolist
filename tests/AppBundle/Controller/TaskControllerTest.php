@@ -56,6 +56,7 @@ class TaskControllerTest extends WebTestCase
 
         $this->login(['ROLE_USER']);
         $crawler = $this->client->request('GET', '/tasks/create');
+
         $form = $crawler->selectButton('Ajouter')->form();
         $form['task[title]'] = 'Le titre de mon test';
         $form['task[content]'] = 'Le contenu de mon test';
@@ -148,7 +149,7 @@ class TaskControllerTest extends WebTestCase
         // the firewall context defaults to the firewall name
         $firewallContext = 'main';
 
-        $token = new UsernamePasswordToken('JohnDoe', null, $firewallContext, $roles);
+        $token = new UsernamePasswordToken($this->user, null, $firewallContext, $roles);
         $session->set('_security_'.$firewallContext, serialize($token));
         $session->save();
 
