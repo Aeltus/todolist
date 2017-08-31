@@ -7,6 +7,7 @@
  */
 namespace Tests\AppBundle\Controller;
 
+use AppBundle\Entity\Task;
 use AppBundle\Entity\User;
 use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -123,6 +124,48 @@ class TaskControllerTest extends WebTestCase
         $this->client->request('GET', '/tasks/1/delete');
         $this->assertContains('Redirecting to /tasks', $this->client->getResponse()->getContent());
 
+    }
+
+    public function testDeleteAnAnomynousTaskIfNotAdminShouldReturnAnErrorMessage(){
+
+        $this->login(['ROLE_USER']);
+        $crawler = $this->client->request('GET', '/tasks/create');
+        $form = $crawler->selectButton('Ajouter')->form();
+        $form['task[title]'] = 'Le titre de mon test';
+        $form['task[content]'] = 'Le contenu de mon test';
+
+        $this->client->submit($form);
+
+        $task = $this->em->getRepository('AppBundle:Task')->findOneBy(['id' => 1]);
+        $task->setUser();
+        $this->em->flush();
+
+        $this->client->request('GET', '/tasks/1/delete');
+        $this->client->followRedirect();
+        $this->assertContains('Vous ne pouvez pas supprimer cette tâche. Seul un administrateur du site le peut.', $this->client->getResponse()->getContent());
+    }
+
+    public function testDeleteATaskOfAnOtherUserShouldReturnAnErrorMessage(){
+        $this->login(['ROLE_USER']);
+
+        $fakeUser = new User();
+        $fakeUser->setEmail('johne.doe@monmail.com');
+        $fakeUser->setUsername('JohneDoe');
+        $fakeUser->setPassword('$2y$13$JupoD6T7C6wzIaXCQoZyK.GIWG9MO9jwgS9iMgYKy788aG7.Tyd92');
+        $this->em->persist($fakeUser);
+
+        $fakeTask = new Task();
+        $fakeTask->setCreatedAt(new \DateTime());
+        $fakeTask->setTitle('Le titre de mon test');
+        $fakeTask->setContent('Le contenu de mon test');
+        $fakeTask->setUser($fakeUser);
+        $this->em->persist($fakeTask);
+
+        $this->em->flush();
+
+        $this->client->request('GET', '/tasks/1/delete');
+        $this->client->followRedirect();
+        $this->assertContains('Vous ne pouvez pas supprimer cette tâche. Seul son propriétaire le peut.', $this->client->getResponse()->getContent());
     }
 
     public function testListShouldReturnATask(){

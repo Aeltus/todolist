@@ -86,6 +86,16 @@ class TaskController extends Controller
      */
     public function deleteTaskAction(Task $task)
     {
+        if($task->getUser() === NULL){
+            if(!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')){
+                $this->addFlash('error', 'Vous ne pouvez pas supprimer cette tâche. Seul un administrateur du site le peut.');
+                return $this->redirectToRoute('task_list');
+            }
+        } elseif ($task->getUser()->getUsername() !== $this->get('security.token_storage')->getToken()->getUser()->getUsername()){
+            $this->addFlash('error', 'Vous ne pouvez pas supprimer cette tâche. Seul son propriétaire le peut.');
+            return $this->redirectToRoute('task_list');
+        }
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($task);
         $em->flush();

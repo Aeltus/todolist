@@ -54,7 +54,7 @@ class UserControllerTest extends WebTestCase
 
     public function testListShouldReturnAListOfUsers()
     {
-        $this->login(['ROLE_USER']);
+        $this->login(['ROLE_ADMIN']);
         $this->client->request('GET', '/users');
         $this->assertEquals($this->client->getResponse()->getStatusCode(), 200);
 
@@ -84,7 +84,7 @@ class UserControllerTest extends WebTestCase
 
     public function testEditShouldUpdateAnUser(){
 
-        $this->login(['ROLE_USER']);
+        $this->login(['ROLE_ADMIN']);
         $crawler = $this->client->request('GET', '/users/1/edit');
         $form = $crawler->selectButton('Modifier')->form();
         $form['user[username]'] = 'JaneDoes';
