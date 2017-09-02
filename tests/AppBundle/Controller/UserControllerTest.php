@@ -64,7 +64,7 @@ class UserControllerTest extends WebTestCase
 
     public function testCreateShouldAddANewUser(){
 
-        $this->login(['ROLE_USER']);
+        $this->login(['ROLE_ADMIN']);
         $crawler = $this->client->request('GET', '/users/create');
         $form = $crawler->selectButton('Ajouter')->form();
         $form['user[username]'] = 'JaneDoe';
