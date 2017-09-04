@@ -29,7 +29,6 @@ class UserType extends AbstractType
                         array
                         (
                             'Administrateur' => 'ROLE_ADMIN',
-                            'Modérateur' => 'ROLE_MODERATOR',
                             'Utilisateur' => 'ROLE_USER'
                         ) ,
                     'multiple' => true,
