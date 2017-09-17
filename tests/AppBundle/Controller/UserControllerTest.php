@@ -7,7 +7,7 @@
  */
 namespace Tests\AppBundle\Controller;
 
-use AppBundle\Entity\User;
+use TodoSecurityBundle\Entity\User;
 use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
@@ -76,7 +76,8 @@ class UserControllerTest extends WebTestCase
 
         $this->assertEquals($this->client->getResponse()->getStatusCode(), 302);
 
-        $user = $this->em->getRepository('AppBundle:User')->findOneBy(['id' => 2]);
+        $user = $this->em->getRepository('TodoSecurityBundle:User')->findOneBy(['id' => 2]);
+        $user->setRoles(['ROLE_USER']);
 
         $this->assertEquals('JaneDoe', $user->getUsername());
 
@@ -96,7 +97,7 @@ class UserControllerTest extends WebTestCase
 
         $this->assertEquals($this->client->getResponse()->getStatusCode(), 302);
 
-        $user = $this->em->getRepository('AppBundle:User')->findOneBy(['id' => 1]);
+        $user = $this->em->getRepository('TodoSecurityBundle:User')->findOneBy(['id' => 1]);
 
         $this->assertEquals('JaneDoes', $user->getUsername());
 

@@ -2,7 +2,7 @@
 
 namespace Tests\AppBundle\Controller;
 
-use AppBundle\Entity\User;
+use TodoSecurityBundle\Entity\User;
 use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;

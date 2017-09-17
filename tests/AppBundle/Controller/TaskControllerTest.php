@@ -8,7 +8,7 @@
 namespace Tests\AppBundle\Controller;
 
 use AppBundle\Entity\Task;
-use AppBundle\Entity\User;
+use TodoSecurityBundle\Entity\User;
 use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
@@ -56,7 +56,7 @@ class TaskControllerTest extends WebTestCase
     public function testCreateShouldAddANewTask(){
 
         $this->login(['ROLE_USER']);
-        $crawler = $this->client->request('GET', '/tasks/create');
+        $crawler = $this->client->request('POST', '/tasks/create');
 
         $form = $crawler->selectButton('Ajouter')->form();
         $form['task[title]'] = 'Le titre de mon test';
@@ -75,7 +75,7 @@ class TaskControllerTest extends WebTestCase
     public function testEditShouldUpdateATask(){
 
         $this->login(['ROLE_USER']);
-        $crawler = $this->client->request('GET', '/tasks/create');
+        $crawler = $this->client->request('POST', '/tasks/create');
         $form = $crawler->selectButton('Ajouter')->form();
         $form['task[title]'] = 'Le titre de mon test';
         $form['task[content]'] = 'Le contenu de mon test';
@@ -106,7 +106,7 @@ class TaskControllerTest extends WebTestCase
 
         $this->client->submit($form);
 
-        $this->client->request('GET', '/tasks/1/toggle');
+        $this->client->request('POST', '/tasks/1/toggle');
         $this->assertContains('Redirecting to /tasks', $this->client->getResponse()->getContent());
 
     }
@@ -121,7 +121,7 @@ class TaskControllerTest extends WebTestCase
 
         $this->client->submit($form);
 
-        $this->client->request('GET', '/tasks/1/delete');
+        $this->client->request('POST', '/tasks/1/delete');
         $this->assertContains('Redirecting to /tasks', $this->client->getResponse()->getContent());
 
     }
@@ -140,7 +140,7 @@ class TaskControllerTest extends WebTestCase
         $task->setUser();
         $this->em->flush();
 
-        $this->client->request('GET', '/tasks/1/delete');
+        $this->client->request('POST', '/tasks/1/delete');
         $this->client->followRedirect();
         $this->assertContains('Vous ne pouvez pas supprimer cette tâche. Seul un administrateur du site le peut.', $this->client->getResponse()->getContent());
     }
@@ -163,7 +163,7 @@ class TaskControllerTest extends WebTestCase
 
         $this->em->flush();
 
-        $this->client->request('GET', '/tasks/1/delete');
+        $this->client->request('POST', '/tasks/1/delete');
         $this->client->followRedirect();
         $this->assertContains('Vous ne pouvez pas supprimer cette tâche. Seul son propriétaire le peut.', $this->client->getResponse()->getContent());
     }

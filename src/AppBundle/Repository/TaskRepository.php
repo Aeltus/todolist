@@ -7,7 +7,7 @@
  */
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\User;
+use TodoSecurityBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
 class TaskRepository extends EntityRepository
@@ -22,6 +22,11 @@ class TaskRepository extends EntityRepository
             ->setParameter(1, $user->getUsername())
         ;
 
-        return $qb->getQuery()->getResult();
+        $query = $qb->getQuery();
+        $query->useQueryCache(true);
+        $query->useResultCache(true);
+        $query->setResultCacheLifetime(5);
+
+        return $query->getResult();
     }
 }

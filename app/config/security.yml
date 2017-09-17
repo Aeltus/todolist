@@ -1,6 +1,6 @@
 security:
     encoders:
-        AppBundle\Entity\User: bcrypt
+        TodoSecurityBundle\Entity\User: bcrypt
 
     role_hierarchy:
       ROLE_USER: ROLE_USER
@@ -9,7 +9,7 @@ security:
     providers:
         doctrine:
             entity:
-                class: AppBundle:User
+                class: TodoSecurityBundle:User
                 property: username
 
     firewalls:
@@ -25,7 +25,9 @@ security:
                 check_path: login_check
                 always_use_default_target_path:  true
                 default_target_path:  /
-            logout: ~
+            logout:
+              path:   /logout
+              target: /logoutvalidator
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
