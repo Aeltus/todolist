@@ -7,7 +7,7 @@
  */
 namespace Tests\AppBundle\Controller;
 
-use AppBundle\Entity\User;
+use TodoSecurityBundle\Entity\User;
 use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
@@ -62,6 +62,13 @@ class SecurityControllerTest extends WebTestCase
 
         $this->client->submit($form);
 
+        $this->assertEquals($this->client->getResponse()->getStatusCode(), 302);
+
+    }
+
+    public function testLogoutValidatorActionShouldRedirectToIndex(){
+
+        $crawler = $this->client->request('GET', '/logoutvalidator');
         $this->assertEquals($this->client->getResponse()->getStatusCode(), 302);
 
     }
