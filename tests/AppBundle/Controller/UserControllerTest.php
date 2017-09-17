@@ -77,6 +77,7 @@ class UserControllerTest extends WebTestCase
         $this->assertEquals($this->client->getResponse()->getStatusCode(), 302);
 
         $user = $this->em->getRepository('TodoSecurityBundle:User')->findOneBy(['id' => 2]);
+        $user->setRoles(['ROLE_USER']);
 
         $this->assertEquals('JaneDoe', $user->getUsername());
 

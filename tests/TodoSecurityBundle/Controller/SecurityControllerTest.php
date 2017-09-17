@@ -68,8 +68,46 @@ class SecurityControllerTest extends WebTestCase
 
     public function testLogoutValidatorActionShouldRedirectToIndex(){
 
+        $session = $this->container->get('session');
+
+        // the firewall context defaults to the firewall name
+        $firewallContext = 'main';
+
+        $token = new UsernamePasswordToken($this->user, null, $firewallContext, ['ROLE_USER']);
+        $session->set('_security_'.$firewallContext, serialize($token));
+        $session->save();
+
+        $cookie = new Cookie($session->getName(), $session->getId());
+        $this->client->getCookieJar()->set($cookie);
+
         $crawler = $this->client->request('GET', '/logoutvalidator');
         $this->assertEquals($this->client->getResponse()->getStatusCode(), 302);
+        $this->client->followRedirect();
+        $this->assertEquals($this->client->getResponse()->getStatusCode(), 200);
+
+    }
+
+    public function testLogoutShouldRedirectToLogin(){
+        $crawler = $this->client->request('GET', '/login');
+
+        $form = $crawler->selectButton('Se connecter')->form();
+        $form['_username'] = 'JohnDoe';
+        $form['_password'] = 'A45y22s@';
+
+        $this->client->submit($form);
+
+        $crawler = $this->client->followRedirect();
+
+        $disconnect = $crawler->selectLink('Se déconnecter')->link();
+        $crawler = $this->client->click($disconnect);
+
+        $this->client->followRedirect();
+        $this->assertEquals($this->client->getResponse()->getStatusCode(), 302);
+
+        $this->client->followRedirect();
+        $this->assertEquals($this->client->getResponse()->getStatusCode(), 200);
+
+        $this->assertContains('Nom d\'utilisateur', $this->client->getResponse()->getContent());
 
     }
 

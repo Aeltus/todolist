@@ -21,16 +21,18 @@ class SecurityController extends Controller
             'last_username' => $lastUsername,
             'error'         => $error,
         ));
-        $response->setSharedMaxAge(3600);
+        $response->setSharedMaxAge(15);
         $response->headers->addCacheControlDirective('must-revalidate', true);
 
         return $response;
     }
 
-    public function logoutValidatorAction(Response $response)
+    public function logoutValidatorAction(Response $response = NULL)
     {
-        $response->expire();
-        $this->addFlash('success', 'Vous avez bien été déconnecté.');
+        if($response){
+            $response->expire();
+        }
+
         return $this->redirectToRoute('homepage');
     }
 
