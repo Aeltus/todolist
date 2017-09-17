@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use TodoSecurityBundle\Entity\User;
 
 /**
  * @ORM\Entity
@@ -42,7 +43,7 @@ class Task
     private $isDone;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="TodoSecurityBundle\Entity\User")
      * @ORM\JoinColumn(nullable=true)
      */
     private $user;

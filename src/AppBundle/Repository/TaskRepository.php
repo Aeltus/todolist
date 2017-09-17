@@ -7,7 +7,7 @@
  */
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\User;
+use TodoSecurityBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
 class TaskRepository extends EntityRepository

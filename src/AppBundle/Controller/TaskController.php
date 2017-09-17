@@ -7,6 +7,7 @@ use AppBundle\Form\Type\TaskType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class TaskController extends Controller
@@ -17,25 +18,29 @@ class TaskController extends Controller
      */
     public function listAction()
     {
-        return $this->render('task/list.html.twig',
+        $response = $this->render('task/list.html.twig',
             ['tasks' => $this->getDoctrine()->getRepository('AppBundle:Task')
                 ->findAllForUser(
                     $this->get('security.token_storage')->getToken()->getUser()
                 )
             ]
         );
+        $response->setSharedMaxAge(3600);
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+
+        return $response;
     }
 
     /**
      * @Route("/tasks/create", name="task_create")
      * @Method({"GET", "POST"})
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, Response $response = NULL)
     {
         $task = new Task();
         $form = $this->createForm(TaskType::class, $task);
 
-        $user = $this->getDoctrine()->getRepository('AppBundle:User')->findOneBy(array('username' => $this->get('security.token_storage')->getToken()->getUser()->getUsername()));
+        $user = $this->getDoctrine()->getRepository('TodoSecurityBundle:User')->findOneBy(array('username' => $this->get('security.token_storage')->getToken()->getUser()->getUsername()));
         $task->setUser($user);
 
         $form->handleRequest($request);
@@ -47,18 +52,25 @@ class TaskController extends Controller
             $em->flush();
 
             $this->addFlash('success', 'La tâche a été bien été ajoutée.');
-
+            if($response){
+                $response->expire();
+            }
             return $this->redirectToRoute('task_list');
         }
 
-        return $this->render('task/create.html.twig', ['form' => $form->createView()]);
+        $response = $this->render('task/create.html.twig', ['form' => $form->createView()]);
+        $response->setSharedMaxAge(3600);
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+
+        return $response;
+
     }
 
     /**
      * @Route("/tasks/{id}/edit", name="task_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Task $task, Request $request)
+    public function editAction(Task $task, Request $request, Response $response = NULL)
     {
         $form = $this->createForm(TaskType::class, $task);
 
@@ -68,14 +80,21 @@ class TaskController extends Controller
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash('success', 'La tâche a bien été modifiée.');
-
+            if($response){
+                $response->expire();
+            }
             return $this->redirectToRoute('task_list');
         }
 
-        return $this->render('task/edit.html.twig', [
+
+        $response = $this->render('task/edit.html.twig', [
             'form' => $form->createView(),
             'task' => $task,
         ]);
+        $response->setSharedMaxAge(3600);
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+
+        return $response;
     }
 
     /**

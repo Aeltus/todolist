@@ -1,0 +1,13 @@
+login:
+    path:     /login
+    defaults: { _controller: TodoSecurityBundle:Security:login }
+
+login_check:
+    path:     /login_check
+
+logout:
+    path:     /logout
+
+logout_validator:
+    path: /logoutvalidator
+    defaults: { _controller: TodoSecurityBundle:Security:logoutValidator }
