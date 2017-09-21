@@ -25,7 +25,7 @@ class TaskController extends Controller
                 )
             ]
         );
-        $response->setSharedMaxAge(3600);
+        $response->setSharedMaxAge(60);
         $response->headers->addCacheControlDirective('must-revalidate', true);
 
         return $response;

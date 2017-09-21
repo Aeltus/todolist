@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f84a49b6-215d-4685-a78c-e260b9eb167b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/TaskController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/TaskController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TodoSecurityBundle/Controller/SecurityController.php" afterPath="$PROJECT_DIR$/src/TodoSecurityBundle/Controller/SecurityController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/AppBundle/Controller/UserControllerTest.php" afterPath="$PROJECT_DIR$/tests/AppBundle/Controller/UserControllerTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/TodoSecurityBundle/Controller/SecurityControllerTest.php" afterPath="$PROJECT_DIR$/tests/TodoSecurityBundle/Controller/SecurityControllerTest.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,7 +19,7 @@
       <file leaf-file-name="SecurityControllerTest.php" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/TodoSecurityBundle/Controller/SecurityControllerTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
+            <state relative-caret-position="285">
               <caret line="28" column="97" lean-forward="false" selection-start-line="28" selection-start-column="97" selection-end-line="28" selection-end-column="97" />
               <folding>
                 <element signature="e#125#160#0#PHP" expanded="true" />
@@ -53,7 +51,7 @@
       <file leaf-file-name="DefaultControllerTest.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/AppBundle/Controller/DefaultControllerTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-313">
+            <state relative-caret-position="105">
               <caret line="11" column="1" lean-forward="false" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
               <folding />
             </state>
@@ -70,7 +68,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserControllerTest.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UserControllerTest.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/AppBundle/Controller/UserControllerTest.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="461">
@@ -85,7 +83,7 @@
       <file leaf-file-name="TaskControllerTest.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/AppBundle/Controller/TaskControllerTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="497">
+            <state relative-caret-position="2685">
               <caret line="189" column="0" lean-forward="false" selection-start-line="189" selection-start-column="0" selection-end-line="199" selection-end-column="52" />
               <folding>
                 <element signature="e#125#151#0#PHP" expanded="true" />
@@ -98,11 +96,24 @@
       <file leaf-file-name="TaskController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/TaskController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="542">
-              <caret line="115" column="51" lean-forward="false" selection-start-line="115" selection-start-column="51" selection-end-line="115" selection-end-column="51" />
+            <state relative-caret-position="-45">
+              <caret line="27" column="37" lean-forward="false" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
               <folding>
                 <element signature="e#40#66#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="345">
+                <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -167,10 +178,11 @@
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/UserController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Repository/TaskRepository.php" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/TaskController.php" />
         <option value="$PROJECT_DIR$/src/TodoSecurityBundle/Controller/SecurityController.php" />
         <option value="$PROJECT_DIR$/tests/TodoSecurityBundle/Controller/SecurityControllerTest.php" />
         <option value="$PROJECT_DIR$/tests/AppBundle/Controller/UserControllerTest.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/TaskController.php" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -204,6 +216,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -414,7 +427,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -533,12 +545,13 @@
       <workItem from="1505224471665" duration="5986000" />
       <workItem from="1505633609805" duration="11069000" />
       <workItem from="1505647654454" duration="15543000" />
-      <workItem from="1505671550124" duration="6095000" />
+      <workItem from="1505671550124" duration="6693000" />
+      <workItem from="1506019460681" duration="769000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="89100000" />
+    <option name="totallyTimeSpent" value="90467000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
@@ -647,16 +660,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -793,7 +796,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -801,9 +803,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="990">
           <caret line="71" column="30" lean-forward="false" selection-start-line="71" selection-start-column="30" selection-end-line="71" selection-end-column="30" />
-          <folding>
-            <marker date="1505671303666" expanded="true" signature="0:109" ph="imports: &lt;3 items&gt;" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -823,19 +822,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/TaskController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="542">
-          <caret line="115" column="51" lean-forward="false" selection-start-line="115" selection-start-column="51" selection-end-line="115" selection-end-column="51" />
-          <folding>
-            <element signature="e#40#66#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/AppBundle/Controller/TaskControllerTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
+        <state relative-caret-position="2685">
           <caret line="189" column="0" lean-forward="false" selection-start-line="189" selection-start-column="0" selection-end-line="199" selection-end-column="52" />
           <folding>
             <element signature="e#125#151#0#PHP" expanded="true" />
@@ -854,7 +843,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/TodoSecurityBundle/Controller/SecurityControllerTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
+        <state relative-caret-position="285">
           <caret line="28" column="97" lean-forward="false" selection-start-line="28" selection-start-column="97" selection-end-line="28" selection-end-column="97" />
           <folding>
             <element signature="e#125#160#0#PHP" expanded="true" />
@@ -864,7 +853,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/AppBundle/Controller/DefaultControllerTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-313">
+        <state relative-caret-position="105">
           <caret line="11" column="1" lean-forward="false" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
           <folding />
         </state>
@@ -877,6 +866,27 @@
           <folding>
             <marker date="1505678109882" expanded="true" signature="3032:3140" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/TaskController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-45">
+          <caret line="27" column="37" lean-forward="false" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
+          <folding>
+            <element signature="e#40#66#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="345">
+            <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
