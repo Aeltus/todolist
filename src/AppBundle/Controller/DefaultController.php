@@ -17,7 +17,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $response = $this->render('default/index.html.twig');
-        $response->setSharedMaxAge(3600);
+        $response->setSharedMaxAge(300);
         $response->headers->addCacheControlDirective('must-revalidate', true);
 
         return $response;
